@@ -1,0 +1,12 @@
+{
+    "data":{
+        "id":"1",
+        "arr":[1,1.23456,"Hello",true,false,null],
+        "obj":{
+            "name":"John",
+            "age":30,
+            "city":"New York"
+        },
+        "other":2131.1
+    }
+}

@@ -1,0 +1,10 @@
+G:/my_program/cpp/JsonParser2/build/CMakeFiles/edit_cache.dir
+G:/my_program/cpp/JsonParser2/build/CMakeFiles/rebuild_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/CMakeFiles/edit_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/CMakeFiles/rebuild_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/jsonparser/CMakeFiles/JsonParser.dir
+G:/my_program/cpp/JsonParser2/build/src/jsonparser/CMakeFiles/edit_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/jsonparser/CMakeFiles/rebuild_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/test/CMakeFiles/Application.dir
+G:/my_program/cpp/JsonParser2/build/src/test/CMakeFiles/edit_cache.dir
+G:/my_program/cpp/JsonParser2/build/src/test/CMakeFiles/rebuild_cache.dir

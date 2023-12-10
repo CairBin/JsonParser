@@ -1,0 +1,22 @@
+[
+{
+  "directory": "G:/my_program/cpp/JsonParser2/build/src/jsonparser",
+  "command": "C:/msys64/mingw64/bin/g++.exe -DJsonParser_EXPORTS @CMakeFiles/JsonParser.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles/JsonParser.dir/json.cc.obj -c G:/my_program/cpp/JsonParser2/src/jsonparser/json.cc",
+  "file": "G:/my_program/cpp/JsonParser2/src/jsonparser/json.cc"
+},
+{
+  "directory": "G:/my_program/cpp/JsonParser2/build/src/jsonparser",
+  "command": "C:/msys64/mingw64/bin/g++.exe -DJsonParser_EXPORTS @CMakeFiles/JsonParser.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles/JsonParser.dir/json_parser.cc.obj -c G:/my_program/cpp/JsonParser2/src/jsonparser/json_parser.cc",
+  "file": "G:/my_program/cpp/JsonParser2/src/jsonparser/json_parser.cc"
+},
+{
+  "directory": "G:/my_program/cpp/JsonParser2/build/src/jsonparser",
+  "command": "C:/msys64/mingw64/bin/g++.exe -DJsonParser_EXPORTS @CMakeFiles/JsonParser.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles/JsonParser.dir/parser.cc.obj -c G:/my_program/cpp/JsonParser2/src/jsonparser/parser.cc",
+  "file": "G:/my_program/cpp/JsonParser2/src/jsonparser/parser.cc"
+},
+{
+  "directory": "G:/my_program/cpp/JsonParser2/build/src/test",
+  "command": "C:/msys64/mingw64/bin/g++.exe  @CMakeFiles/Application.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles/Application.dir/main.cc.obj -c G:/my_program/cpp/JsonParser2/src/test/main.cc",
+  "file": "G:/my_program/cpp/JsonParser2/src/test/main.cc"
+}
+]

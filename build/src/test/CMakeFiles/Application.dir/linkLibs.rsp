@@ -1,0 +1,1 @@
+  -LG:/my_program/cpp/JsonParser2/lib  G:/my_program/cpp/JsonParser2/bin/libJsonParser.dll.a -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
