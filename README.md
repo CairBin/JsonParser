@@ -1,6 +1,6 @@
 # JsonParser
 ## 描述
-JsonParser 是一个 Json 解析器，用于将 Json 字符串解析成对象。
+JsonParser 是一个 Json 解析器，用于将 Json 文本解析成对象。
 
 ## 使用
 
