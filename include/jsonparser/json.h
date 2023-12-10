@@ -44,6 +44,19 @@ public:
     void Copy(const Json &other);
     void Append(const Json &other);
 
+    void Remove(int index);
+    void Remove(const std::string& key);
+    void Remove(const char* key);
+
+    void Insert(int index,const Json& json);
+    void Insert(const std::string& key, const Json& json);
+    void Insert(const char* key, const Json& json);
+
+    bool FindKey(const std::string& key) const;
+    bool FindKey(const char* key) const;
+
+    unsigned long Size() const;
+
     Json &operator[](int index);
     Json &operator[](const std::string &key);
     Json &operator[](const char* key);
@@ -51,7 +64,8 @@ public:
     bool operator==(const Json &other) const;
     bool operator!=(const Json &other) const;
     bool Equal(const Json &other) const;
-
+    Json CopySelf() const;
+    unsigned long UseCount();
     std::string ToJsonString();
     
     //类型判断

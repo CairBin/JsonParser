@@ -1,3 +1,0 @@
-"E:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Application.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\Application.dir/objects.a @CMakeFiles\Application.dir\objects1
-C:\msys64\mingw64\bin\c++.exe -Wl,--whole-archive CMakeFiles\Application.dir/objects.a -Wl,--no-whole-archive -o G:\my_program\cpp\JsonParser2\bin\Application.exe -Wl,--out-implib,G:\my_program\cpp\JsonParser2\bin\libApplication.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Application.dir\linkLibs.rsp

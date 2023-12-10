@@ -1,6 +1,7 @@
 #include "jsonparser/json.h"
 #include <stdexcept>
 #include <sstream>
+#include <algorithm>
 
 namespace json_parser{
 Json::Json()
@@ -191,6 +192,7 @@ void Json::Append(const Json& other){
     }
     Json json;
     json.Copy(other);
+    value_.array_value = std::make_shared<std::vector<Json>>(*value_.array_value);
     value_.array_value->emplace_back(json);
 }
 
@@ -314,6 +316,13 @@ bool Json::Equal(const Json& other)const{
     }
 }
 
+//制造一份自己的拷贝，深拷贝
+Json Json::CopySelf() const{
+    Json json;
+    json.Copy(*this);
+    return json;
+}
+
 bool Json::IsNull() const{
     return type_ == JsonType::JSON_NULL;
 }
@@ -349,6 +358,138 @@ bool Json::IsNumber() const{
 JsonType Json::get_type() const{
     return this->type_;
 }
+
+unsigned long Json::UseCount(){
+    switch(type_){
+        case JsonType::JSON_OBJECT:
+            return value_.object_value.use_count();
+        case JsonType::JSON_ARRAY:
+            return value_.array_value.use_count();
+        case JsonType::JSON_STRING:
+            return value_.string_value.use_count();
+        case JsonType::JSON_BOOL:
+        case JsonType::JSON_INT:
+        case JsonType::JSON_DOUBLE:
+        case JsonType::JSON_NULL:
+            throw std::logic_error("type error: no reference counters of the type");
+        default:
+            throw std::runtime_error("unknow error: occurred in method `UseCount()`");
+    }
+}
+
+void Json::Remove(int index){
+    if(type_!=JsonType::JSON_ARRAY){
+        throw std::logic_error("type error: the type is not json array");
+    }
+
+    if(index < 0){
+        throw std::logic_error("range error: the index cannot less than 0");
+    }
+
+    if(index >= value_.array_value->size()){
+        throw std::logic_error("range error: the index out of the size");
+    }
+    value_.array_value = std::make_shared<std::vector<Json> >(*value_.array_value);
+    value_.array_value->erase(value_.array_value->begin()+index);
+}
+
+void Json::Insert(int index, const Json& json){
+    if(type_ != JsonType::JSON_ARRAY){
+        throw std::logic_error("type error: the type is not json array");
+    }
+
+    if(index < 0){
+        throw std::logic_error("range error: the index cannot less than 0");
+    }
+
+    if(index > value_.array_value->size()){
+        throw std::logic_error("range error: the index cannot more than the array size");
+    }
+
+    value_.array_value = std::make_shared<std::vector<Json>>(*value_.array_value);
+    value_.array_value->insert(value_.array_value->begin()+index,json.CopySelf());
+}
+
+void Json::Insert(const std::string& key, const Json& json){
+    if(type_!=JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    value_.object_value = std::make_shared<std::map<std::string,Json>>(*value_.object_value);
+    (*value_.object_value)[key] = json.CopySelf();
+}
+
+void Json::Insert(const char* key, const Json& json){
+    if(type_!=JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    value_.object_value = std::make_shared<std::map<std::string,Json>>(*value_.object_value);
+    (*value_.object_value)[key] = json.CopySelf();
+}
+
+void Json::Remove(const std::string& key){
+    if(type_!=JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    if(value_.object_value->find(key) == value_.object_value->end()){
+        return; //键不存在直接返回，没必要进行复制
+    }
+
+    //否则写时复制
+    value_.object_value = std::make_shared<std::map<std::string,Json>>(*value_.object_value);
+    value_.object_value->erase(key);
+}
+
+void Json::Remove(const char* key){
+    if(type_!=JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    if(value_.object_value->find(key) == value_.object_value->end()){
+        return; //键不存在直接返回，没必要进行复制
+    }
+
+    //否则写时复制
+    value_.object_value = std::make_shared<std::map<std::string,Json>>(*value_.object_value);
+    value_.object_value->erase(key);
+}
+
+unsigned long Json::Size()const{
+    switch(type_){
+        case JsonType::JSON_ARRAY:
+            return value_.array_value->size();
+        case JsonType::JSON_OBJECT:
+            return value_.object_value->size();
+        case JsonType::JSON_STRING:
+            return value_.string_value->size();
+        case JsonType::JSON_INT:
+        case JsonType::JSON_BOOL:
+        case JsonType::JSON_DOUBLE:
+        case JsonType::JSON_NULL:
+            throw std::logic_error("type error: unsupport the method for this type");
+        default:
+            throw std::runtime_error("unknow error: occurred in `Size()`");
+    }
+}
+
+bool Json::FindKey(const std::string& key) const{
+    if(type_ != JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    return value_.object_value->find(key) == value_.object_value->end();
+}
+
+bool Json::FindKey(const char* key) const{
+    if(type_ != JsonType::JSON_OBJECT){
+        throw std::logic_error("type error: the type is not json object");
+    }
+
+    return value_.object_value->find(key) == value_.object_value->end();
+}
+
 
 Json::~Json() {}
 
